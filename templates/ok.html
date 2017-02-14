@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="Ваша заявка принята. Ждите звонка нашего менеджера!">
+	<meta name="description" content="Ваша заявка принята. Ждите звонка нашего менеджера!">
+	<meta name="format-detection" content="telephone=no">
+{#	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />#}
+	<title>Спасибо за заявку</title>
+	<link media="all" rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+	<link media="all" rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}" />
+	<link media="all" rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.css' %}" />
+	<script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.validate.js' %}"></script>
+	<script src="{% static 'js/jquery.fancybox.js' %}"></script>
+	<script src="{% static 'js/jquery.maskedinput.js' %}"></script>
+	<script src="{% static 'js/all.js' %}"></script>
+	<!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/html5.js' %}"></script><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/placeholder.js' %}"></script><![endif]-->
+	<script type="text/javascript">
+		setTimeout('location.replace("{% url 'landing:index' %}")', 8000);
+	</script>
+</head>
+<body>
+	<div id="wrapper" class="thnx">
+		<div class="thnx-text">
+			Ваша заявка принята<br>
+			В ближайшее время с вами свяжется наш менеджер!
+		</div>
+	</div>
+</body>
+</html>

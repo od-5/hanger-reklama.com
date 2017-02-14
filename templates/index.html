@@ -1,0 +1,542 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{#	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />#}
+  <title>Рекламные технологии</title>
+  <link media="all" rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
+  <link media="all" rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}" />
+  <link media="all" rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.css' %}" />
+  <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.validate.js' %}"></script>
+  <script src="{% static 'js/jquery.form.js' %}"></script>
+  <script src="{% static 'js/jquery.fancybox.js' %}"></script>
+  <script src="{% static 'js/jquery.maskedinput.js' %}"></script>
+  <!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/html5.js' %}"></script><![endif]-->
+  <!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/placeholder.js' %}"></script><![endif]-->
+  <script src="{% static 'js/all.js' %}?v=1"></script>
+</head>
+<body>
+  <div id="wrapper">
+    <div class="mask{% if not object %} active{% endif %}"></div>
+    <header class="header">
+      <div class="holder">
+        <div class="header-top">
+          <div class="header-logo">
+            <img src="{% static 'images/logo.png' %}" alt="">
+          </div>
+          <div class="header-right">
+            <div class="header-phone">
+              <a href="tel:{% if object.phone %}{{ object.phone }}{% else %}{{ SETUP.phone|default:'8 800 234-37-37' }}{% endif %}">{% if object.phone %}{{ object.phone }}{% else %}{{ SETUP.phone|default:'8 800 234-37-37' }}{% endif %}</a>
+            </div>
+            <div class="header-callback"><a href="#popup2" class="fancybox">Заказать обратный звонок</a></div>
+          </div>
+          <div class="header-city">
+            <a href="" class="header-city-link"><span>{{ object|default:'Выберите Ваш город' }}</span></a>
+          </div>
+        </div>
+        <div class="city-hidden" {% if object %}style="display: none;"{% endif %}>
+          <div class="holder">
+          {% if object %}
+            <a href="" class="city-hidden-close">X</a>
+          {% endif %}
+            <div class="city-hidden-title">Выберите Ваш город</div>
+            <form action="send1.php" method="post">
+              <fieldset>
+                <input type="text" name="search" class="input" placeholder="Ваш город">
+              </fieldset>
+            </form>
+            <ul class="city-hidden-list">
+              {% for city in city_list %}
+                <li><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
+              {% endfor %}
+{#              <li><a href="">Краснодар</a></li>#}
+{#              <li><a href="">Ростов-на-Дону</a></li>#}
+{#              <li><a href="">Севастополь</a></li>#}
+{#              <li><a href="">Симферополь</a></li>#}
+{#              <li><a href="">Екатеринбург</a></li>#}
+{#              <li><a href="">Краснодар</a></li>#}
+{#              <li><a href="">Ростов-на-Дону</a></li>#}
+{#              <li><a href="">Севастополь</a></li>#}
+{#              <li><a href="">Симферополь</a></li>#}
+{#              <li><a href="">Екатеринбург</a></li>#}
+{#              <li><a href="">Краснодар</a></li>#}
+{#              <li><a href="">Ростов-на-Дону</a></li>#}
+{#              <li><a href="">Севастополь</a></li>#}
+{#              <li><a href="">Симферополь</a></li>#}
+{#              <li><a href="">Екатеринбург</a></li>#}
+{#              <li><a href="">Краснодар</a></li>#}
+{#              <li><a href="">Ростов-на-Дону</a></li>#}
+{#              <li><a href="">Севастополь</a></li>#}
+{#              <li><a href="">Симферополь</a></li>#}
+{#              <li><a href="">Екатеринбург</a></li>#}
+{#              <li><a href="">Краснодар</a></li>#}
+{#              <li><a href="">Ростов-на-Дону</a></li>#}
+{#              <li><a href="">Севастополь</a></li>#}
+{#              <li><a href="">Симферополь</a></li>#}
+{#              <li><a href="">Екатеринбург</a></li>#}
+            </ul>
+          </div>
+        </div>
+        <div class="header-banner">
+          <img src="{% static 'images/banner-text1.png' %}" alt="" class="banner-text1">
+          <img src="{% static 'images/banner-text2.png' %}" alt="" class="banner-text2">
+          <h1>Получите новых клиентов<br> в первый день размещения с помощью<br> массовой рекламы вашего бизнеса</h1>
+          <div class="header-banner-text">50 000 листовок на ручки входных дверей<br> с вашей рекламой <b>всего за  70 коп. / экземпляр!</b></div>
+        </div>
+        <div class="header-banner-hidden">
+          50 000 листовок на ручки входных дверей с вашей рекламой
+          <span class="header-banner-hidden-big">всего за  70 коп. / экземпляр!</span>
+        </div>
+        <div class="header-form">
+          <div class="form-section-text">Получите <strong>+1000 экземпляров с вашей рекламой в подарок к заказу!</strong><br>
+          Оставьте заявку на консультацию:</div>
+          <div class="form-line">
+            <form action="{% url 'landing:ticket' %}" method="post" class="js-ticket-form">
+              {% csrf_token %}
+              <fieldset>
+                <input name="name" type="text" class="input" placeholder="Ваше имя">
+                <input name="phone" type="text" class="input" placeholder="+7 (___) __-__-__">
+                <input name="mail" type="text" class="input" placeholder="Ваш email">
+                <input type="hidden" name="city" value="{{ object.name|default:'' }}">
+                <input type="hidden" name="theme" value="Заявка на консультацию">
+                <button class="submit"><span class="submit-arrow">Оставить заявку</span></button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="how">
+      <div class="holder">
+        <h2><span class="normal">Как размещение рекламы на дверных ручках от компании "Рекламные технологии"</span>
+        поможет увеличить прибыль вашего бизнеса?</h2>
+        <div class="how-block">
+          <div class="how-line">
+            <div class="how-item how1">
+              <div class="how-icon"><img src="{% static 'images/icon1.png' %}" alt=""></div>
+              <div class="how-text">Большинство ваших клиентов — физические лица, обычные потребители товаров и услуг, которые
+              ежедневно ходят на работу, в магазины, покупают товары и пользуются бытовыми услугами.</div>
+            </div>
+            <div class="how-item how2">
+              <div class="how-icon"><img src="{% static 'images/icon2.png' %}" alt=""></div>
+              <div class="how-text">Вы только открылись и не располагаете большим рекламным бюджетом, поэтому ищете самый
+              выгодный и недорогой способ рассказать о себе.</div>
+            </div>
+          </div>
+          <div class="how-line">
+            <div class="how-item how3">
+              <div class="how-icon"><img src="{% static 'images/icon3.png' %}" alt=""></div>
+              <div class="how-text">У вас работающий бизнес, который вы регулярно рекламируете, но текущие затраты на
+              рекламу не приносят ожидаемой выгоды.</div>
+            </div>
+            <div class="how-item how4">
+              <div class="how-icon"><img src="{% static 'images/icon4.png' %}" alt=""></div>
+              <div class="how-text">Вам надоело сливать рекламный бюджет и не получать новых клиентов. Вы хотите
+              наконец-то увидеть реальный результат от вложений в рекламу.</div>
+            </div>
+          </div>
+          <div class="how-item how5">
+            <div class="how-icon"><img src="{% static 'images/icon5.png' %}" alt=""></div>
+            <div class="how-text">Вы постоянно заказываете размещение рекламной продукции в лифтах, почтовых
+            ящиках, на досках объявлений в газетах бесплатных объявлений, но никогда не уверены, что весь
+            оплаченный тираж оказался на месте назначения.</div>
+          </div>
+        </div>
+        <div class="how-big-text">Решение этих проблем существует <br>— получайте больше, платите меньше</div>
+      </div>
+    </section>
+    <section class="info">
+      <div class="holder">
+        <h2><span class="normal">Коробок спичек или новый клиент для вашего бизнеса…</span> <br>
+        А что выбираете вы?</h2>
+        <div class="info-top">
+          <div class="info-top-img">
+            <img src="{% static 'images/media/info1.png' %}" alt="">
+          </div>
+          <div class="info-top-text">Нет, это не ошибка. 70 копеек или цена коробка спичек — именно столько стоит контакт с
+          потенциальным клиентом при размещении информации о вашем бизнесе в листовке, которая выпускается в форме хенгера
+          и распространяется на дверные ручки квартир в многоэтажных домах.</div>
+          <div class="line2"></div>
+        </div>
+        <div class="info-mid">
+          <div class="info-mid-img">
+            <img src="{% static 'images/media/info2.png' %}" alt="">
+          </div>
+          <div class="info-mid-show">нажми</div>
+          <div class="info-mid-text">
+            <p>В качестве бонуса вы получаете возможность удаленного контроля за распространением каждого экземпляра
+            рекламной продукции по каждому адресу программы.</p>
+            <p>Никакого обмана — вы сидите за компьютером и по карте наблюдаете за передвижением исполнителя вашего
+            заказа, просматривая на сервере фотографии по каждому адресу программы.</p>
+            <ul class="info-list">
+              <li>Гарантия лучшей цены<br> Стоимость контакта — 70 копеек</li>
+              <li>Гарантия эффективности<br> 99% экземпляров попадают в квартиру потенциального клиента</li>
+              <li>Гарантия результата<br> Новые клиенты уже в первый день распространения листовки</li>
+              <li>Гарантия качества<br> Фотоотчет по каждому адресу размещения с привязкой к гугл-карте</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="form-section">
+      <div class="holder">
+        <div class="form-section-text">Получите <strong>+1000 экземпляров с вашей рекламой в подарок к заказу!</strong><br>
+        Оставьте заявку на консультацию:</div>
+        <div class="form-line">
+          <form action="{% url 'landing:ticket' %}" method="post" class="js-ticket-form">
+            {% csrf_token %}
+            <fieldset>
+              <input name="name" type="text" class="input" placeholder="Ваше имя">
+              <input name="phone" type="text" class="input" placeholder="+7 (___) ___-__-__">
+              <input name="mail" type="text" class="input" placeholder="Ваш email">
+              <input type="hidden" name="city" value="{{ object.name|default:'' }}">
+              <input type="hidden" name="theme" value="Заявка на консультацию">
+              <button class="submit"><span class="submit-arrow">Оставить заявку</span></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="table-section">
+      <div class="table-bg">
+        <div class="holder">
+          <h2><span class="normal">Узнайте, почему наши хенгер-листовки</span><br>
+          выгодней и эффективней других видов рекламы</h2>
+          <div class="table-block">
+            <table>
+              <tr>
+                <th></th>
+                <th>Размещение рекламы в листовке от компании Рекламные технологии</th>
+                <th>Размещение хенгеров на дверных ручках квартир у конкурентов</th>
+                <th>Рекламные листовки в почтовые ящики и газеты бесплатных объявлений</th>
+                <th>Реклама <br>в лифте</th>
+                <th>Реклама <br>в Интернет</th>
+              </tr>
+              <tr>
+                <td><strong class="red">Стоимость <br>контакта</strong></td>
+                <td><strong>70 копеек за потенциальный контакт</strong></td>
+                <td>От 3 рублей за один экземпляр продукции при заказе на сумму от 150 000 рублей</td>
+                <td>от 1,1 рубля за потенциальный контакт (печать и распространение)</td>
+                <td>Минимум 50 рублей за подъезд или 1,4р. за потенциальный контакт</td>
+                <td>Минимальная цена рекламной кампании в Интернете — 100 000 рублей.С меньшим бюджетом вы даже
+                не окупите расходы на рекламу.</td>
+              </tr>
+              <tr>
+                <td><strong class="red">Гарантия контакта аудитории с рекламой</strong></td>
+                <td><strong>В 99 случаях из 100 листовка попадает в квартиру. Эффективность 99%</strong></td>
+                <td>99% тиража оказывается в квартире, но нет гарантии, что исполнители доставят весь оплаченный тираж к месту назначения</td>
+                <td>Только 7% от рекламного тиража жители забирают с собой, остальные экземпляры оказываются в мусорном ящике непрочитанными.</td>
+                <td>Рекламный стенд находится на видном месте, но люди настолько к нему привыкли, что 60% жителей даже не читают информацию на нем.</td>
+                <td>Нет гарантий. Возможно, ваши клиенты не пользуются Интернетом или практически не сидят за компьютером.</td>
+              </tr>
+              <tr>
+                <td><strong class="red">Гарантия <br>доставки <br>рекламы</strong></td>
+                <td><strong>100%-ный фотоотчет по каждому адресу с отслеживанием маршрута исполнения заказа на гугл-карте</strong></td>
+                <td>Выборочный фотоотчет без возможности проверки принадлежности фотографий к тому или иному адресу</td>
+                <td>Выборочный фотоотчет</td>
+                <td>Выборочный фотоотчет</td>
+                <td>Возможность удаленного контроля затраченных на рекламу средств или иному адресу</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="why">
+      <div class="holder">
+        <h2><span class="normal">Почему размещение рекламы в листовке в форме хенгера — оптимальный рекламный формат, который
+        работает на вас с первого дня размещения</span></h2>
+        <div class="why-block">
+          <div class="why-item">
+            <div class="why-top">
+              <div class="why-top-text">Размещение рекламы в сети Интернет</div>
+            </div>
+            <div class="why-img">
+              <img src="{% static 'images/media/w1.jpg' %}" alt="">
+            </div>
+            <div class="why-text">Слишком дорого</div>
+          </div>
+          <div class="why-item">
+            <div class="why-top">
+              <div class="why-top-text">Распространение листовок по почтовым ящикам</div>
+            </div>
+            <div class="why-img">
+              <img src="{% static 'images/media/w2.jpg' %}" alt="">
+            </div>
+            <div class="why-text">Дешево, но недостаточно эффективно</div>
+          </div>
+          <div class="why-item">
+            <div class="why-top">
+              <div class="why-top-text">Реклама в лифте</div>
+            </div>
+            <div class="why-img">
+              <img src="{% static 'images/media/w3.jpg' %}" alt="">
+            </div>
+            <div class="why-text">Игнорируется целевой аудиторией</div>
+          </div>
+          <div class="why-item">
+            <div class="why-top">
+              <div class="why-top-text">Распространение хенгеров у наших конкурентов</div>
+            </div>
+            <div class="why-img">
+              <img src="{% static 'images/media/w4.jpg' %}" alt="">
+            </div>
+            <div class="why-text">Эффективно, дорого и без гарантий</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="about">
+      <div class="holder">
+        <h2>Ключевые преимущества<br> нашей рекламы</h2>
+        <div class="about-block">
+          <div class="about-item about1">
+            <div class="about-img">
+              <img src="{% static 'images/media/about1.jpg' %}" alt="">
+            </div>
+            <div class="about-text">
+              <p>В листовке размещается информация нескольких рекламодателей, за счет чего мы предлагаем вам лучшую цену
+              на рекламном рынке. Аналогичные услуги у конкурентов стоят в 3 раза дороже.</p>
+              <p><strong>Вам не нужно искать дешевле. Дешевле просто не бывает.</strong></p>
+            </div>
+          </div>
+          <div class="about-item about-right about2">
+            <div class="about-img">
+              <img src="{% static 'images/media/about2.jpg' %}" alt="">
+            </div>
+            <div class="about-text">
+              <p>Листовку, размещенную на ручке входной двери, невозможно не заметить или проигнорировать.
+              Никто не захочет мусорить около своего жилища, поэтому она гарантированно попадет в дом в 99 случаях из 100.
+              Ни один рекламный формат не способен обеспечить такой высокий процент контакта с потенциальным клиентом.</p>
+              <p><strong>О вас узнает каждый житель каждой квартиры, участвующей в адресной программе.</strong></p>
+            </div>
+          </div>
+          <div class="about-item about3">
+            <div class="about-img">
+              <div class="about-video">
+                <img src="{% static 'images/media/about3.jpg' %}" alt="">
+                <div class="about-video-holder">
+                  <iframe src="https://www.youtube.com/embed/rg_mxj_riUw" frameborder="0" allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+            <div class="about-text">
+              <p>Вы забудете о бесконечных поездках по адресам для проверки качества и полноты выполнения
+              вашего заказа, которые, к тому же, не дают 100%-ной уверенности в том, что часть тиража не
+              оказалась выброшенной в мусор недобросовестными исполнителями. </p>
+              <p>Вы проверяете работу, сидя за
+              компьютером и просматривая фотографии по каждому адресу на нашем сервере. Каждое фото привязано
+              к гугл-карте с помощьюGPS-навигации, поэтому вы увидите точные адреса размещения рекламной
+              продукции. Программу невозможно обмануть.</p>
+              <p><strong>Вы получаете 100%-ную гарантию доставки всего тиража по назначенному адресу.</strong></p>
+            </div>
+          </div>
+          <div class="about-item about-right about4">
+            <div class="about-img">
+              <img src="{% static 'images/media/about4.jpg' %}" alt="">
+            </div>
+            <div class="about-text">
+              <p>Помимо рекламных блоков, листовка содержит полезную информацию, а именно, контактные телефоны
+              служб города, полезные советы и новости.</p>
+              <p>Вряд ли кто-то осмелится сразу же выбросить ее в мусорное ведро. Ее сохранят, а значит,
+              ваша реклама будет работать еще спустя время, приводя к вам новых и новых клиентов.</p>
+              <p><strong>О вас не просто узнают — вас запомнят.</strong></p>
+            </div>
+          </div>
+          <div class="about-item about5">
+            <div class="about-img">
+              <img src="{% static 'images/media/about5.jpg' %}" alt="">
+            </div>
+            <div class="about-text">
+              <p>Адресная программа распространения — это новостройки и дома повышенной комфортности вашего города</p>
+              <p><strong>Прямое попадание вашей рекламы в руки самой платежеспособной аудитории!</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="call">
+      <div class="holder">
+        <h2>Что вам нужно сделать сейчас, чтобы начать получать новых клиентов?</h2>
+        <div class="call-block">
+          Звоните по телефону
+          <b>{% if object.phone %}{{ object.phone }}{% else %}{{ SETUP.phone|default:'8 800 234-37-37' }}{% endif %}</b>
+        </div>
+        <div class="call-text">Все остальное компания "Рекламные технологии" сделает за вас!</div>
+      </div>
+    </section>
+    <section class="price">
+      <div class="holder">
+        <div class="price-top">
+          <div class="price-top-block">
+            <div class="price-top-title">Стоимость рекламного тиража</div>
+            <div class="price-top-subtitle">{{ object.price|default:'35 000' }} рублей за {{ object.price|default:'50 000' }} экземпляров</div>
+            <div class="price-top-white">
+              <div class="price-top-num">70</div>
+              <div class="price-top-text">копеек за за одну единицу листовки с вашей рекламой</div>
+            </div>
+          </div>
+        </div>
+        <div class="price-block">
+          <div class="price-info">
+            <h3>Что входит в стоимость?</h3>
+            <ul class="price-info-list">
+              <li><p>Разработка маркетинговой стратегии и адресной программы для рекламной кампании от профессионалов рекламного рынка</p></li>
+              <li><p>Уникальный дизайн листовки-хенгера<br>
+              «под ключ»</p></li>
+              <li><p>Фотоотчет в виде 50 000 фотографий, привязанных  с помощью GPS-навигации к каждому адресу на гугл-карте,
+              по которому была заказана услуга распространения листовки</p>
+              <div class="price-info-hide">
+                <p><b>Что вы получите на выходе?</b></p>
+                <p>По окончанию подготовительных работ вот такая листовка  с рекламой вашего бизнеса отправится
+                прямо в дом  к вашим будущим клиентам.</p>
+                <p>Цена указана за одно рекламное место — стандартный формат визитки.</p>
+              </div>
+              </li>
+            </ul>
+          </div>
+          <div class="price-img-column">
+            <div class="price-img">
+              <img src="{% static 'images/media/hanger/1.jpg' %}" alt="" class="hanger1">
+              <img src="{% static 'images/media/hanger/2.jpg' %}" alt="" class="hanger2">
+              <img src="{% static 'images/media/hanger/3.jpg' %}" alt="" class="hanger3">
+              <img src="{% static 'images/media/hanger/4.jpg' %}" alt="" class="hanger4">
+              <img src="{% static 'images/media/hanger/5.jpg' %}" alt="" class="hanger5">
+              <img src="{% static 'images/media/hanger/6.jpg' %}" alt="" class="hanger6">
+            </div>
+            <div class="price-info-hidden">
+              <p><b>Что вы получите на выходе?</b></p>
+              <p>По окончанию подготовительных работ вот такая листовка  с рекламой вашего бизнеса отправится
+              прямо в дом  к вашим будущим клиентам.</p>
+              <p>Цена указана за одно рекламное место — стандартный формат визитки.</p>
+            </div>
+          </div>
+        </div>
+        <a href="#popup" class="button fancybox">
+          <span class="button-text">Заказать размещение рекламы на нескольких рекламных блоках</span>
+          <span class="button-text-big">и получить скидку 10%</span>
+        </a>
+      </div>
+    </section>
+    <section class="review">
+      <div class="holder">
+        <h2>Отзывы и результаты наших клиентов</h2>
+        <div class="review-slider">
+          <div class="owl-carousel">
+            <div class="review-slide">
+              <div class="review-user">
+                <div class="review-photo"><img src="{% static 'images/media/r1.jpg' %}" alt=""></div>
+                <div class="review-name"><b>Иван Александрович</b>
+                владелец сети пиццерий</div>
+              </div>
+              <div class="review-text">“Мы недавно открылись, и о нас знали только жители близлежащих домов. Примерно 30% столов
+              пустовали даже в вечернее время в пятницу. Ждать, когда “сарафанное радио” сработает, и люди пойдут в наши пиццерии,
+              было слишком долго. Разместились в листовке и уже в ближайшую субботу у нас был аншлаг. Пришлось даже вызвать
+              официантов с выходных. Иногда спрашиваем у посетителей, откуда они о нас узнали. Удивляет то, что говорят
+              о листовках на дверных ручках даже спустя месяц после размещения.”</div>
+            </div>
+            <div class="review-slide">
+              <div class="review-user">
+                <div class="review-photo"><img src="{% static 'images/media/r2.jpg' %}" alt=""></div>
+                <div class="review-name"><b>Ирина Вадимова</b>
+                хозяйка маникюрного салона</div>
+              </div>
+              <div class="review-text">“Мой салон работает на рынке бьюти-услуг уже давно. У нас есть свои постоянные
+              клиенты, но для развития и роста этого недостаточно. Я периодически заказывала рекламу по распространению
+              листовок в почтовых ящиках, но во время проверки находила продукцию в урне прямо около подъезда. Попробовав
+              размещение в листовке, я не только оценила степень удобства проверки выполнения работы удаленно, но и
+              значительно ощутила приток новых клиентов. Иногда приходилось записывать клиентов на две недели вперед.“</div>
+            </div>
+            <div class="review-slide">
+              <div class="review-user">
+                <div class="review-photo"><img src="{% static 'images/media/r3.jpg' %}" alt=""></div>
+                <div class="review-name"><b>Марина Зайцева</b>
+                представитель интернет-провайдера</div>
+              </div>
+              <div class="review-text">“Мы только вошли на рынок, поэтому проблема завоевания потребительского доверия
+              для нас стояла очень остро. Мы предложили условия лучше, чем у конкурентов, заказали рекламу на радио и
+              местном телевидении. В общем, потратили много денег, но получили совсем не те результаты, которые ожидали.
+              И только после регулярного размещения в листовках мы увидели отдачу от вложений. Порадовало то, что потратили
+              мы на это денег в 4 раза меньше, а получили откликов во много раз больше, чем при выборе других рекламных носителей.“</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="form-section">
+      <div class="holder">
+        <div class="form-section-text">Получите <strong>+1000 экземпляров с вашей рекламой в подарок к заказу!</strong><br>
+        Оставьте заявку на консультацию:</div>
+        <div class="form-line">
+          <form action="{% url 'landing:ticket' %}" method="post" class="js-ticket-form">
+            {% csrf_token %}
+            <fieldset>
+              <input name="name" type="text" class="input" placeholder="Ваше имя">
+              <input name="phone" type="text" class="input" placeholder="+7 (___) __-__-__">
+              <input name="mail" type="text" class="input" placeholder="Ваш email">
+              <input type="hidden" name="city" value="{{ object.name|default:'' }}">
+              <input type="hidden" name="theme" value="Заявка на консультацию">
+              <button class="submit"><span class="submit-arrow">Оставить заявку</span></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="holder">
+        <div class="footer-copy">Все права защищены &copy;
+        <script type="text/javascript">var mdate = new Date(); document.write(mdate.getFullYear());</script><br>
+        <a href="#hidden-block" class="fancybox">Политика конфиденциальности</a></div>
+        <div class="footer-right">
+          <div class="footer-phone"><a href="tel:{% if object.phone %}{{ object.phone }}{% else %}{{ SETUP.phone|default:'8 800 234-37-37' }}{% endif %}">{% if object.phone %}{{ object.phone }}{% else %}{{ SETUP.phone|default:'8 800 234-37-37' }}{% endif %}</a></div>
+          <div class="footer-callback"><a href="#popup2" class="fancybox">Заказать обратный звонок</a></div>
+        </div>
+        <div class="footer-studio">
+          <span>Дизайн сайта:</span>
+          <a href="http://neurondg.com/" target="_blank"><img src="{% static 'images/studio.png' %}" alt=""></a>
+        </div>
+        <div id="hidden-block">
+          <h2>Политика конфиденциальности</h2>
+          <p>Мы не собираем личную информацию о Вас, когда Вы заходите на наш сайт.
+          Вы можете анонимно просматривать сайт. Тем не менее, Ваш браузер все же автоматически сообщает нам тип компьютера и операционной системы, которые Вы используете. Единственная личная информация о Вас, которую мы получаем, это те данные, которые Вы добровольно предоставляете при заполнении форм.
+          При заполнении форм на сайте у Вас запросят персональную информацию, такую как имя, номер телефона. Предоставление такой информации в ответ на запрос осуществляется Вами исключительно добровольно.
+          Предоставленная Вами информация используется чтобы оказать те услуги, которые Вы сами запрашиваете.</p>
+        </div>
+      </div>
+    </footer>
+    <div id="popup" class="popup">
+      <div class="popup-title">Оставить заявку на консультацию</div>
+      <form action="{% url 'landing:ticket' %}" method="post" class="js-ticket-form">
+        {% csrf_token %}
+        <fieldset>
+          <input name="name" type="text" class="input" placeholder="Ваше имя">
+          <input name="phone" type="text" class="input" placeholder="+7 (___) __-__-__">
+          <input name="mail" type="text" class="input" placeholder="Ваш email">
+          <input type="hidden" name="city" value="{{ object.name|default:'' }}">
+          <input type="hidden" name="theme" value="Заявка на консультацию">
+          <button class="submit">Оставить заявку</button>
+        </fieldset>
+      </form>
+    </div>
+    <div id="popup2" class="popup">
+      <div class="popup-title">Заказать обратный звонок</div>
+      <form action="{% url 'landing:ticket' %}" method="post" class="js-ticket-form">
+        {% csrf_token %}
+        <fieldset>
+          <input name="phone" type="text" class="input" placeholder="Ваш телефон">
+          <input type="hidden" name="theme" value="Заявка на обратный звонок">
+          <input type="hidden" name="city" value="{{ object.name|default:'' }}">
+          <button class="submit">Заказать звонок</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
