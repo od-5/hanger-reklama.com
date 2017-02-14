@@ -1,2 +1,4 @@
 /core/migrations
 /apps/landing/migrations
+.idea/
+*.pyc
