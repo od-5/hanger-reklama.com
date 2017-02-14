@@ -1,4 +1,5 @@
 /core/migrations
 /apps/landing/migrations
 .idea/
+/cms/settings/local_settings.py
 *.pyc
