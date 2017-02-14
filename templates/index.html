@@ -88,10 +88,10 @@
           <img src="{% static 'images/banner-text1.png' %}" alt="" class="banner-text1">
           <img src="{% static 'images/banner-text2.png' %}" alt="" class="banner-text2">
           <h1>Получите новых клиентов<br> в первый день размещения с помощью<br> массовой рекламы вашего бизнеса</h1>
-          <div class="header-banner-text">50 000 листовок на ручки входных дверей<br> с вашей рекламой <b>всего за  70 коп. / экземпляр!</b></div>
+          <div class="header-banner-text">{{ object.count|default:'50 000' }} листовок на ручки входных дверей<br> с вашей рекламой <b>всего за  70 коп. / экземпляр!</b></div>
         </div>
         <div class="header-banner-hidden">
-          50 000 листовок на ручки входных дверей с вашей рекламой
+          {{ object.count|default:'50 000' }} листовок на ручки входных дверей с вашей рекламой
           <span class="header-banner-hidden-big">всего за  70 коп. / экземпляр!</span>
         </div>
         <div class="header-form">
@@ -377,7 +377,7 @@
         <div class="price-top">
           <div class="price-top-block">
             <div class="price-top-title">Стоимость рекламного тиража</div>
-            <div class="price-top-subtitle">{{ object.price|default:'35 000' }} рублей за {{ object.price|default:'50 000' }} экземпляров</div>
+            <div class="price-top-subtitle">{{ object.price|default:'35 000' }} рублей за {{ object.count|default:'50 000' }} экземпляров</div>
             <div class="price-top-white">
               <div class="price-top-num">70</div>
               <div class="price-top-text">копеек за за одну единицу листовки с вашей рекламой</div>
@@ -391,7 +391,7 @@
               <li><p>Разработка маркетинговой стратегии и адресной программы для рекламной кампании от профессионалов рекламного рынка</p></li>
               <li><p>Уникальный дизайн листовки-хенгера<br>
               «под ключ»</p></li>
-              <li><p>Фотоотчет в виде 50 000 фотографий, привязанных  с помощью GPS-навигации к каждому адресу на гугл-карте,
+              <li><p>Фотоотчет в виде {{ object.count|default:'50 000' }} фотографий, привязанных  с помощью GPS-навигации к каждому адресу на гугл-карте,
               по которому была заказана услуга распространения листовки</p>
               <div class="price-info-hide">
                 <p><b>Что вы получите на выходе?</b></p>
