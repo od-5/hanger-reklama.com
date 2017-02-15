@@ -11,6 +11,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
+from core.models import Setup
 
 from .models import City
 
@@ -37,9 +38,16 @@ def ticket(request):
             if current_city:
                 price = current_city.price or '35 000'
                 count = current_city.count or '50 000'
+                if current_city.phone:
+                    phone = current_city.phone
+                else:
+                    if Setup.object.first().phone:
+                        phone = Setup.object.first().phone
+                    else:
+                        phone = None
                 subject = u'Спасибо за заявку на сайте hanger-reklama.com'
                 # msg_plain = render_to_string('email.txt', {'name': name})
-                msg_html = render_to_string('landing/mail.html', {'price': price, 'count': count})
+                msg_html = render_to_string('landing/mail.html', {'phone': phone, 'price': price, 'count': count})
                 # try:
                 send_mail(
                     subject,
