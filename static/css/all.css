@@ -165,8 +165,8 @@ p {
 .header-banner-hidden {display: none;}
 
 .city-hidden {
-	position: absolute;
-	top: 96px;
+	position: fixed;
+	top: 0;
 	left: 0;
 	right: 0;
 	z-index: 200;
@@ -201,6 +201,8 @@ p {
 .city-hidden-list {
 	overflow: hidden;
 	padding: 43px 0 40px;
+    overflow-y: scroll;
+    max-height: 400px;
 }
 .city-hidden-list li {
 	float: left;
@@ -1033,6 +1035,16 @@ label.error {
 	margin-left: -480px;
 }
 /************************* media *************************/
+@media screen and (max-height: 500px) {
+	.city-hidden-list  {
+        max-height: 280px;
+    }
+}
+@media screen and (max-height: 320px) {
+	.city-hidden-list  {
+        max-height: 190px;
+	}
+}
 @media screen and (max-width: 1023px) {
 	.why-block {
 		max-width: 600px;
@@ -1133,14 +1145,14 @@ label.error {
 	.header-banner {
 		height: auto;
 		margin: 0 -20px;
-		padding: 25px 20px 270px;
-		background: url(../images/media/banner-mob.jpg) 50% 0 no-repeat;
+		padding: 25px 20px 370px;
+		background: url(../images/media/banner-mob.jpg) 50% 50% no-repeat;
 		background-size: cover;
 	}
 	.header-banner h1 {
 		margin: 0 0 25px;
-		font-size: 21px;
-		line-height: 29px;
+		font-size: 30px;
+		line-height: 40px;
 	}
 	.header-banner-text {display: none;}
 	.header-banner-hidden {
@@ -1365,6 +1377,10 @@ label.error {
 	
 }
 @media screen and (max-width: 640px) {
+	.header-banner h1 {
+		font-size: 21px;
+		line-height: 29px;
+	}
 	.city-hidden-list li {
 		width: 48%;
 		margin: 0 0 12px 4%;
@@ -1404,6 +1420,13 @@ label.error {
 	}
 }
 @media screen and (max-width: 480px) {
+    .header-banner {
+		padding: 25px 20px 270px;
+	}
+	.header-banner h1 {
+		font-size: 21px;
+		line-height: 29px;
+	}
 	.about-video {
 		margin: 0 auto;
 		width: 320px;

@@ -1,4 +1,4 @@
-import datetime
+# coding=utf-8
 from core.models import Setup
 
 __author__ = 'alexy'

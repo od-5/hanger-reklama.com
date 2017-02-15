@@ -23,6 +23,7 @@
   <script src="{% static 'js/all.js' %}?v=1"></script>
 </head>
 <body>
+{{ SETUP.top_js|safe|default:'' }}
   <div id="wrapper">
     <div class="mask{% if not object %} active{% endif %}"></div>
     <header class="header">
@@ -53,9 +54,11 @@
               </fieldset>
             </form>
             <ul class="city-hidden-list">
+            {% for i in '11111111111111' %}
               {% for city in city_list %}
                 <li><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
               {% endfor %}
+            {% endfor %}
 {#              <li><a href="">Краснодар</a></li>#}
 {#              <li><a href="">Ростов-на-Дону</a></li>#}
 {#              <li><a href="">Севастополь</a></li>#}
@@ -538,5 +541,6 @@
       </form>
     </div>
   </div>
+{{ SETUP.bottom_js|safe|default:'' }}
 </body>
 </html>

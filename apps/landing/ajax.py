@@ -20,13 +20,10 @@ def ticket(request):
     city = request.POST.get('city')
     headers = {'User-Agent': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)'}
     values = {'name': name.encode('utf-8'), 'phone': phone.encode('utf-8'), 'mail': mail.encode('utf-8'), 'theme': theme.encode('utf-8'), 'city': city.encode('utf-8')}
-    print values
     data = urllib.urlencode(values)
-    print data
     req = urllib2.Request('http://reklamadoma.com/ticket/hanger/', data, headers)
     response = urllib2.urlopen(req)
     answer = json.load(response)
-
     if answer['success']:
         return {
             'success': True,

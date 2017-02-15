@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import ugettext_lazy as _
+
 from .models import User, Setup
 
 __author__ = 'alexy'
@@ -78,6 +79,12 @@ class MyUserAdmin(UserAdmin):
 
 class SetupAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'phone')
+
+    def has_add_permission(self, request):
+        if self.model.objects.count() < 1:
+            return True
+        else:
+            return False
 
 
 admin.site.register(User, MyUserAdmin)
