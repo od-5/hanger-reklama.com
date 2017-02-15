@@ -54,10 +54,8 @@
               </fieldset>
             </form>
             <ul class="city-hidden-list">
-            {% for i in '11111111111111' %}
-              {% for city in city_list %}
-                <li><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
-              {% endfor %}
+            {% for city in city_list %}
+              <li><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
             {% endfor %}
 {#              <li><a href="">Краснодар</a></li>#}
 {#              <li><a href="">Ростов-на-Дону</a></li>#}

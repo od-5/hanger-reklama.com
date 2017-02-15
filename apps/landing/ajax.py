@@ -5,7 +5,14 @@ import urllib2
 import json
 
 from annoying.decorators import ajax_request
+from annoying.functions import get_object_or_None
+
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
+
+from .models import City
 
 __author__ = 'alexy'
 
@@ -25,6 +32,24 @@ def ticket(request):
     response = urllib2.urlopen(req)
     answer = json.load(response)
     if answer['success']:
+        if mail:
+            current_city = get_object_or_None(City, name=city)
+            if current_city:
+                price = current_city.price or '35 000'
+                count = current_city.count or '50 000'
+                subject = u'Спасибо за заявку на сайте hanger-reklama.com'
+                # msg_plain = render_to_string('email.txt', {'name': name})
+                msg_html = render_to_string('landing/mail.html', {'price': price, 'count': count})
+                try:
+                    send_mail(
+                        subject,
+                        msg_html,
+                        settings.DEFAULT_FROM_EMAIL,
+                        [mail, ],
+                        html_message=msg_html,
+                    )
+                except:
+                    pass
         return {
             'success': True,
             'name': name,
