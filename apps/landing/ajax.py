@@ -40,16 +40,16 @@ def ticket(request):
                 subject = u'Спасибо за заявку на сайте hanger-reklama.com'
                 # msg_plain = render_to_string('email.txt', {'name': name})
                 msg_html = render_to_string('landing/mail.html', {'price': price, 'count': count})
-                try:
-                    send_mail(
-                        subject,
-                        msg_html,
-                        settings.DEFAULT_FROM_EMAIL,
-                        [mail, ],
-                        html_message=msg_html,
-                    )
-                except:
-                    pass
+                # try:
+                send_mail(
+                    subject,
+                    msg_html,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [mail, ],
+                    html_message=msg_html,
+                )
+                # except:
+                #     pass
         return {
             'success': True,
             'name': name,

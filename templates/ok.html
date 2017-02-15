@@ -20,7 +20,7 @@
 	<!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/html5.js' %}"></script><![endif]-->
 	<!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/placeholder.js' %}"></script><![endif]-->
 	<script type="text/javascript">
-		setTimeout('location.replace("{% url 'landing:index' %}")', 8000);
+		setTimeout('location.replace("{{ request.META.HTTP_REFERER }}")', 8000);
 	</script>
 </head>
 <body>
