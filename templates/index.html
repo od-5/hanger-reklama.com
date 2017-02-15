@@ -3,12 +3,12 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="keywords" content="">
-  <meta name="description" content="">
+  <meta name="keywords" content="{% if object %}{{ object.meta_key|default:'' }}{% else %}{{ SETUP.meta_key|default:'' }}{% endif %}">
+  <meta name="description" content="{% if object %}{{ object.meta_desc|default:'' }}{% else %}{{ SETUP.meta_desc|default:'' }}{% endif %}">
   <meta name="format-detection" content="telephone=no">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 {#	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />#}
-  <title>Рекламные технологии</title>
+  <title>{% if object %}{{ object.meta_title|default:'Рекламные технологии' }}{% else %}{{ SETUP.title|default:'Рекламные технологии' }}{% endif %}</title>
   <link media="all" rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}" />
   <link media="all" rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}" />
   <link media="all" rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.css' %}" />
