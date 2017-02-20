@@ -10,7 +10,7 @@ class CityAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'count', 'price', 'slug')
     prepopulated_fields = {'slug': ('name',)}
     fieldsets = (
-        (None, {'fields': ('name', 'phone', 'count', 'price', 'slug')}),
+        (None, {'fields': ('name', 'second_name', 'phone', 'count', 'price', 'slug')}),
         (u'SEO', {'fields': ('meta_title', 'meta_desc', 'meta_key')}),
     )
 

@@ -57,46 +57,23 @@
             {% for city in city_list %}
               <li><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
             {% endfor %}
-{#              <li><a href="">Краснодар</a></li>#}
-{#              <li><a href="">Ростов-на-Дону</a></li>#}
-{#              <li><a href="">Севастополь</a></li>#}
-{#              <li><a href="">Симферополь</a></li>#}
-{#              <li><a href="">Екатеринбург</a></li>#}
-{#              <li><a href="">Краснодар</a></li>#}
-{#              <li><a href="">Ростов-на-Дону</a></li>#}
-{#              <li><a href="">Севастополь</a></li>#}
-{#              <li><a href="">Симферополь</a></li>#}
-{#              <li><a href="">Екатеринбург</a></li>#}
-{#              <li><a href="">Краснодар</a></li>#}
-{#              <li><a href="">Ростов-на-Дону</a></li>#}
-{#              <li><a href="">Севастополь</a></li>#}
-{#              <li><a href="">Симферополь</a></li>#}
-{#              <li><a href="">Екатеринбург</a></li>#}
-{#              <li><a href="">Краснодар</a></li>#}
-{#              <li><a href="">Ростов-на-Дону</a></li>#}
-{#              <li><a href="">Севастополь</a></li>#}
-{#              <li><a href="">Симферополь</a></li>#}
-{#              <li><a href="">Екатеринбург</a></li>#}
-{#              <li><a href="">Краснодар</a></li>#}
-{#              <li><a href="">Ростов-на-Дону</a></li>#}
-{#              <li><a href="">Севастополь</a></li>#}
-{#              <li><a href="">Симферополь</a></li>#}
-{#              <li><a href="">Екатеринбург</a></li>#}
             </ul>
           </div>
         </div>
         <div class="header-banner">
           <img src="{% static 'images/banner-text1.png' %}" alt="" class="banner-text1">
           <img src="{% static 'images/banner-text2.png' %}" alt="" class="banner-text2">
-          <h1>Получите новых клиентов<br> в первый день размещения с помощью<br> массовой рекламы вашего бизнеса</h1>
-          <div class="header-banner-text">{{ object.count|default:'50 000' }} листовок на ручки входных дверей<br> с вашей рекламой <b>всего за  70 коп. / экземпляр!</b></div>
+{#          <h1>Получите новых клиентов<br> в первый день размещения с помощью<br> массовой рекламы вашего бизнеса</h1>#}
+          <h1>Разместим вашу рекламу на {{ object.count|default:'50 000' }} дверных ручек всего за 70 коп./ экземпляр в {{ object.second_name|default:'' }}</h1>
+          <div class="header-banner-text">
+            В 3.5 раза эффективней  раздачи листовок и других видов<br> рекламы. Гарантия контакта с аудиторией 99%. Получите<br> новых клиентов в первый день размещения
+          </div>
         </div>
         <div class="header-banner-hidden">
-          {{ object.count|default:'50 000' }} листовок на ручки входных дверей с вашей рекламой
-          <span class="header-banner-hidden-big">всего за  70 коп. / экземпляр!</span>
+          В 3.5 раза эффективней  раздачи листовок и других видов рекламы. Гарантия контакта с аудиторией 99%. Получите новых клиентов в первый день размещения
         </div>
         <div class="header-form">
-          <div class="form-section-text">Получите <strong>+1000 экземпляров с вашей рекламой в подарок к заказу!</strong><br>
+          <div class="form-section-text">Получите <strong>+1000 экземпляров в подарок к вашему первому заказу рекламы!</strong><br>
           Оставьте заявку на консультацию:</div>
           <div class="form-line">
             <form action="{% url 'landing:ticket' %}" method="post" class="js-ticket-form">

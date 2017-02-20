@@ -1045,6 +1045,11 @@ label.error {
         max-height: 190px;
 	}
 }
+@media screen and (min-width: 768px) {
+	.header-banner h1 {
+		width: 70%;
+	}
+}
 @media screen and (max-width: 1023px) {
 	.why-block {
 		max-width: 600px;

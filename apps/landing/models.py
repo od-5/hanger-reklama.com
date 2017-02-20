@@ -20,6 +20,10 @@ class City(CommonPage):
         return reverse('landing:city', args=(self.slug,))
 
     name = models.CharField(max_length=100, verbose_name=u'Название')
+    second_name = models.CharField(
+        max_length=100, verbose_name=u'Название города в предложном падеже',
+        help_text=u'в Ростове-На-Дону, в Волгограде'
+    )
     phone = models.CharField(max_length=100, verbose_name=u'Телефон', blank=True, null=True)
     count = models.PositiveIntegerField(verbose_name=u'Количество экземпляров', blank=True, null=True)
     price = models.PositiveIntegerField(verbose_name=u'Стоимость, руб', blank=True, null=True)
