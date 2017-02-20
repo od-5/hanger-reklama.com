@@ -24,11 +24,13 @@
 	</script>
 </head>
 <body>
+{{ SETUP.top_js|safe|default:'' }}
 	<div id="wrapper" class="thnx">
 		<div class="thnx-text">
 			Ваша заявка принята<br>
 			В ближайшее время с вами свяжется наш менеджер!
 		</div>
 	</div>
+{{ SETUP.bottom_js|safe|default:'' }}
 </body>
 </html>
