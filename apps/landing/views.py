@@ -32,8 +32,17 @@ class CityDetailView(DetailView, CityListMixin):
     template_name = 'index.html'
 
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
 def home_view(request):
-    ip = request.META.get('REMOTE_ATTR', '')
+    ip = get_client_ip(request)
     try:
         geoip_record = IpRange.objects.by_ip(ip)
         city_name = geoip_record.city.name
