@@ -12,6 +12,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'django_geoip.middleware.LocationMiddleware',
 )
 
 if settings.DEBUG:

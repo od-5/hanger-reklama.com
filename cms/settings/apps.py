@@ -14,4 +14,5 @@ INSTALLED_APPS = (
     'core',
     'apps.landing',
     'django_cleanup',
+    'django_geoip'
 )

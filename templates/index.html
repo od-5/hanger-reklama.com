@@ -21,6 +21,9 @@
   <!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/html5.js' %}"></script><![endif]-->
   <!--[if lt IE 9]><script type="text/javascript" src="{% static 'js/placeholder.js' %}"></script><![endif]-->
   <script src="{% static 'js/all.js' %}?v=1"></script>
+  <script>
+    console.log({{ location }});
+  </script>
 </head>
 <body>
 {{ SETUP.top_js|safe|default:'' }}

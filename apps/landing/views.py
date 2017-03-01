@@ -2,6 +2,7 @@
 from annoying.decorators import ajax_request
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.base import ContextMixin
 
@@ -27,3 +28,13 @@ class LandingView(TemplateView, CityListMixin):
 class CityDetailView(DetailView, CityListMixin):
     model = City
     template_name = 'index.html'
+
+
+def home_view(request):
+    # return HttpResponseRedirect(reverse('distributor:update', args=(distriutor.id,)))
+    location = request.location
+    context = {
+        'city_list': City.objects.all(),
+        'location': location
+    }
+    return render(request, 'index.html', context)

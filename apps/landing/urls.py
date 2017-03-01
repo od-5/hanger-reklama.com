@@ -10,7 +10,7 @@ __author__ = 'alexy'
 
 urlpatterns = patterns(
     'apps.landing.views',
-    url(r'^$', LandingView.as_view(), name='index'),
+    url(r'^$', 'home_view', name='index'),
     url(r'^(?P<slug>[\w-]+)$', CityDetailView.as_view(), name='city'),
     url(r'^thnx/$', TemplateView.as_view(template_name='ok.html'), name='thnx'),
     # url(r'^mail/$', TemplateView.as_view(template_name='landing/mail.html'), name='mail'),
