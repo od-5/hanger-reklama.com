@@ -44,6 +44,7 @@ def home_view(request):
         city_name = None
     context = {
         'city_list': City.objects.all(),
-        'location': city_name
+        'location': city_name,
+        'ip': ip
     }
     return render(request, 'index.html', context)
