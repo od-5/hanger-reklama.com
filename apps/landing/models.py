@@ -26,5 +26,6 @@ class City(CommonPage):
     )
     phone = models.CharField(max_length=100, verbose_name=u'Телефон', blank=True, null=True)
     count = models.PositiveIntegerField(verbose_name=u'Количество экземпляров', blank=True, null=True)
+    price_item = models.PositiveIntegerField(verbose_name=u'Стоимость за экземпляр, коп', default=30)
     price = models.PositiveIntegerField(verbose_name=u'Стоимость, руб', blank=True, null=True)
     slug = models.SlugField(max_length=100, verbose_name=u'URL города')
